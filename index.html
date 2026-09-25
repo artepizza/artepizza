@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arte Pizza — Pizza & Pasta</title>
+<meta name="description" content="Arte Pizza — wood-fired pizza and fresh pasta. Eat in, take away or order by phone and WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f1e6;
+    --paper: #fffaf1;
+    --ink: #2a1d15;
+    --muted: #6f5d50;
+    --red: #b8322a;
+    --red-dark: #8f231d;
+    --green: #3f6b3a;
+    --line: #e4d8c4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247,241,230,.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.5rem; text-decoration: none; }
+  .logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 24px; font-size: .95rem; font-weight: 500; }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--red); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { padding: 80px 0 72px; text-align: center; position: relative; overflow: hidden; }
+  .flag { display: flex; justify-content: center; gap: 6px; margin-bottom: 28px; }
+  .flag i { width: 36px; height: 5px; border-radius: 3px; display: block; }
+  .flag i:nth-child(1) { background: var(--green); }
+  .flag i:nth-child(2) { background: #fff; border: 1px solid var(--line); }
+  .flag i:nth-child(3) { background: var(--red); }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-weight: 800;
+    font-size: clamp(3rem, 11vw, 6.5rem); line-height: 1; letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--red); font-style: italic; font-weight: 600; }
+  .hero p.tag { margin: 20px auto 36px; max-width: 520px; font-size: 1.15rem; color: var(--muted); }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 26px; border-radius: 999px; font-weight: 600;
+    text-decoration: none; transition: transform .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-red { background: var(--red); color: #fff; }
+  .btn-red:hover { background: var(--red-dark); }
+  .btn-green { background: #25a244; color: #fff; }
+  .btn-outline { border: 2px solid var(--ink); }
+
+  /* INFO STRIP */
+  .strip { background: var(--ink); color: var(--cream); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 26px 20px; text-align: center; font-size: .95rem; }
+  .strip b { display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #f3c9a0; margin-bottom: 2px; }
+  @media (max-width: 640px) { .strip .wrap { grid-template-columns: 1fr; } }
+
+  /* SECTIONS */
+  section { padding: 80px 0; }
+  .eyebrow { color: var(--red); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: .8rem; text-align: center; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3rem); text-align: center; margin: 6px 0 12px; }
+  .lead { text-align: center; color: var(--muted); max-width: 560px; margin: 0 auto 48px; }
+
+  /* MENU */
+  .tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+  .tab {
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+    padding: 10px 20px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .menu-panel { display: none; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 12px 32px; }
+  .menu-panel.active { display: block; }
+  .item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px dashed var(--line); }
+  .item:last-child { border-bottom: none; }
+  .item-body { flex: 1; }
+  .item-head { display: flex; align-items: baseline; gap: 10px; }
+  .item-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; }
+  .dots { flex: 1; border-bottom: 2px dotted #cdbda4; transform: translateY(-5px); }
+  .price { font-weight: 600; color: var(--red); white-space: nowrap; }
+  .item-desc { color: var(--muted); font-size: .93rem; margin-top: 2px; }
+  .badge { display: inline-block; font-size: .7rem; font-weight: 600; background: #e8f0e4; color: var(--green); padding: 2px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
+  @media (max-width: 640px) { .menu-panel { padding: 4px 18px; } }
+
+  /* ABOUT */
+  .about { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .about h2, .about .eyebrow { text-align: left; }
+  .about p { color: var(--muted); margin-bottom: 14px; }
+  .pizza-art { aspect-ratio: 1; max-width: 380px; margin: 0 auto; width: 100%; }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* VISIT */
+  .visit-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 12px; }
+  .hours { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .hours td { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .hours td:last-child { text-align: right; font-weight: 500; }
+  .contact-line { margin-bottom: 8px; }
+  .map { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); min-height: 360px; }
+  .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
+  @media (max-width: 760px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  footer { background: var(--ink); color: #cbbba8; text-align: center; padding: 36px 20px; font-size: .9rem; }
+  footer .logo { color: var(--cream); display: inline-block; margin-bottom: 6px; }
+
+  /* Floating WhatsApp */
+  .wa-float {
+    position: fixed; right: 18px; bottom: 18px; z-index: 20;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25a244; display: grid; place-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,.25);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo">Arte <span>Pizza</span></a>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#visit">Visit us</a>
+    </div>
+    <a href="tel:+212600000000" class="btn btn-red" style="padding:9px 18px;font-size:.9rem;">Call to order</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="flag"><i></i><i></i><i></i></div>
+    <h1>Arte <span>Pizza</span></h1>
+    <p class="tag">Pizza and fresh pasta, made with love. Eat in, take away, or order by phone and WhatsApp.</p>
+    <div class="btns">
+      <a href="#menu" class="btn btn-red">See the menu</a>
+      <a href="https://wa.me/212600000000" class="btn btn-green">Order on WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>Open daily</b>12:00 – 23:30</div>
+    <div><b>Call us</b>+212 6 00 00 00 00</div>
+    <div><b>Find us</b>Your street, Your city</div>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <p class="eyebrow">Our menu</p>
+    <h2>Made fresh, every day</h2>
+    <p class="lead">All pizzas are baked to order. Prices in Moroccan dirhams (DH).</p>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="pizza">Pizza</button>
+      <button class="tab" data-tab="pasta">Pasta</button>
+      <button class="tab" data-tab="starters">Starters & salads</button>
+      <button class="tab" data-tab="drinks">Desserts & drinks</button>
+    </div>
+
+    <div class="menu-panel active" id="pizza">
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Margherita <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, fresh basil, olive oil</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Quattro Formaggi <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">75 DH</span></div><p class="item-desc">Mozzarella, gorgonzola, parmesan, goat cheese</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Pollo</span><span class="dots"></span><span class="price">70 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, grilled chicken, peppers, onion</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Frutti di Mare</span><span class="dots"></span><span class="price">90 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, shrimp, calamari, garlic, parsley</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Arte Special</span><span class="dots"></span><span class="price">85 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, beef, mushrooms, olives, rocket</p></div></div>
+    </div>
+
+    <div class="menu-panel" id="pasta">
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Spaghetti Bolognese</span><span class="dots"></span><span class="price">65 DH</span></div><p class="item-desc">Slow-cooked beef ragù, parmesan</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Penne Arrabbiata <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Spicy tomato sauce, garlic, chilli, parsley</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Tagliatelle Alfredo</span><span class="dots"></span><span class="price">70 DH</span></div><p class="item-desc">Creamy parmesan sauce, chicken, mushrooms</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Linguine ai Frutti di Mare</span><span class="dots"></span><span class="price">95 DH</span></div><p class="item-desc">Shrimp, calamari, mussels, cherry tomatoes, white wine sauce</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Lasagna al Forno</span><span class="dots"></span><span class="price">75 DH</span></div><p class="item-desc">Layers of pasta, beef ragù, béchamel, mozzarella</p></div></div>
+    </div>
+
+    <div class="menu-panel" id="starters">
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Garlic Bread</span><span class="dots"></span><span class="price">25 DH</span></div><p class="item-desc">Fresh from the oven, with herb butter</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Bruschetta <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">35 DH</span></div><p class="item-desc">Toasted bread, tomato, basil, olive oil</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Caesar Salad</span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Romaine, chicken, parmesan, croutons, Caesar dressing</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Caprese <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">50 DH</span></div><p class="item-desc">Tomato, mozzarella, basil, balsamic</p></div></div>
+    </div>
+
+    <div class="menu-panel" id="drinks">
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Tiramisu</span><span class="dots"></span><span class="price">40 DH</span></div><p class="item-desc">Homemade, with mascarpone and espresso</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Panna Cotta</span><span class="dots"></span><span class="price">35 DH</span></div><p class="item-desc">With red fruit coulis</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Soft drinks</span><span class="dots"></span><span class="price">15 DH</span></div><p class="item-desc">Coca-Cola, Fanta, Sprite, water</p></div></div>
+      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Fresh juice</span><span class="dots"></span><span class="price">20 DH</span></div><p class="item-desc">Orange, lemon-mint, or seasonal</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <svg class="pizza-art" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="92" fill="#d9a35c"/>
+      <circle cx="100" cy="100" r="80" fill="#c8412f"/>
+      <g fill="#f6e7c1">
+        <ellipse cx="72" cy="70" rx="16" ry="12"/><ellipse cx="128" cy="78" rx="15" ry="11"/>
+        <ellipse cx="96" cy="112" rx="18" ry="13"/><ellipse cx="62" cy="122" rx="13" ry="10"/>
+        <ellipse cx="136" cy="128" rx="16" ry="12"/><ellipse cx="104" cy="150" rx="12" ry="9"/>
+      </g>
+      <g fill="#3f6b3a">
+        <ellipse cx="86" cy="86" rx="7" ry="4" transform="rotate(-30 86 86)"/>
+        <ellipse cx="118" cy="104" rx="7" ry="4" transform="rotate(20 118 104)"/>
+        <ellipse cx="78" cy="140" rx="7" ry="4" transform="rotate(40 78 140)"/>
+        <ellipse cx="140" cy="100" rx="6" ry="3.5" transform="rotate(-50 140 100)"/>
+        <ellipse cx="108" cy="62" rx="6" ry="3.5" transform="rotate(10 108 62)"/>
+      </g>
+      <g stroke="#b37a3a" stroke-width="1.5" opacity=".5">
+        <line x1="100" y1="8" x2="100" y2="192"/><line x1="8" y1="100" x2="192" y2="100"/>
+        <line x1="35" y1="35" x2="165" y2="165"/><line x1="165" y1="35" x2="35" y2="165"/>
+      </g>
+    </svg>
+    <div>
+      <p class="eyebrow">Our story</p>
+      <h2>Italian classics, local heart</h2>
+      <p>At Arte Pizza, we make every pizza by hand and cook our pasta fresh to order. We use good ingredients and keep things simple, the way Italian food should be.</p>
+      <p>Whether you're stopping by for a quick lunch, dinner with family, or ordering in on a busy night, we'd love to feed you.</p>
+      <a href="#visit" class="btn btn-outline" style="margin-top:8px;">Visit us</a>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <p class="eyebrow">Visit us</p>
+    <h2>Come hungry</h2>
+    <p class="lead">Eat in, take away, or call ahead and we'll have it ready.</p>
+    <div class="visit-grid">
+      <div class="card">
+        <h3>Opening hours</h3>
+        <table class="hours">
+          <tr><td>Monday – Thursday</td><td>12:00 – 23:00</td></tr>
+          <tr><td>Friday</td><td>14:00 – 23:30</td></tr>
+          <tr><td>Saturday – Sunday</td><td>12:00 – 23:30</td></tr>
+        </table>
+        <h3>Contact</h3>
+        <p class="contact-line">📍 Your street, Your city, Morocco</p>
+        <p class="contact-line">📞 <a href="tel:+212600000000">+212 6 00 00 00 00</a></p>
+        <p class="contact-line" style="margin-bottom:20px;">✉️ <a href="mailto:contact@artepizza.ma">contact@artepizza.ma</a></p>
+        <div class="btns" style="justify-content:flex-start;">
+          <a href="tel:+212600000000" class="btn btn-red">Call now</a>
+          <a href="https://wa.me/212600000000" class="btn btn-green">WhatsApp</a>
+        </div>
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps?q=Morocco&output=embed" loading="lazy" title="Arte Pizza location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">Arte <span style="color:#f3c9a0">Pizza</span></a>
+  <p>Pizza & Pasta · © <span id="year"></span> Arte Pizza</p>
+</footer>
+
+<a href="https://wa.me/212600000000" class="wa-float" aria-label="Order on WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg>
+</a>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.menu-panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
