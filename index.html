@@ -1,298 +1,514 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arte Pizza — Pizza & Pasta</title>
-<meta name="description" content="Arte Pizza — wood-fired pizza and fresh pasta. Eat in, take away or order by phone and WhatsApp.">
+<title>ARTé — Pizza, Pasta & Risotto</title>
+<meta name="description" content="ARTé : pizzas, pasta, risotto, salades et desserts. Sur place, à emporter ou commande par téléphone et WhatsApp.">
+<meta property="og:title" content="ARTé — Pizza, Pasta & Risotto">
+<meta property="og:description" content="Pizzas, pasta, risotto, salades et desserts. Découvrez notre menu.">
+<meta property="og:image" content="img/og.jpg">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f7f1e6;
-    --paper: #fffaf1;
-    --ink: #2a1d15;
-    --muted: #6f5d50;
-    --red: #b8322a;
-    --red-dark: #8f231d;
-    --green: #3f6b3a;
-    --line: #e4d8c4;
+    --bg: #0a0a0a;
+    --panel: #141311;
+    --panel-2: #1b1916;
+    --gold: #d6a330;
+    --gold-soft: #e9c46e;
+    --text: #f3ede2;
+    --muted: #a39a8c;
+    --line: rgba(214,163,48,.2);
+    --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans: 'Montserrat', system-ui, sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    line-height: 1.6;
-  }
+  html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
   a { color: inherit; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(247,241,230,.94);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
+  /* ---------- NAV ---------- */
+  .nav { position: sticky; top: 0; z-index: 30; background: rgba(10,10,10,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .nav-logo img { height: 30px; width: auto; }
+  .nav-links { display: flex; gap: 30px; font-size: .78rem; letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links a { text-decoration: none; color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+
+  /* ---------- BUTTONS ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px; font-family: var(--sans); font-size: .8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all .2s; cursor: pointer; border: 1px solid var(--gold); }
+  .btn-gold { background: var(--gold); color: #0a0a0a; }
+  .btn-gold:hover { background: var(--gold-soft); border-color: var(--gold-soft); }
+  .btn-line { color: var(--gold); background: transparent; }
+  .btn-line:hover { background: rgba(214,163,48,.1); }
+  .btn-sm { padding: 10px 18px; font-size: .72rem; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; min-height: calc(100vh - 68px); display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  .hero-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 60px 56px 60px max(20px, calc((100vw - 1180px) / 2 + 20px)); position: relative; z-index: 2; }
+  .hero-logo { width: min(420px, 80%); height: auto; margin-bottom: 28px; }
+  .kicker { font-size: .75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .hero-tag { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.25; font-weight: 500; max-width: 460px; margin-bottom: 36px; }
+  .hero-tag em { color: var(--gold); }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-img { position: relative; }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-img::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, rgba(10,10,10,.2) 30%, rgba(10,10,10,0) 60%); z-index: 1; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-img { position: absolute; inset: 0; }
+    .hero-img::before { background: linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.85) 60%, var(--bg) 100%); }
+    .hero-text { padding: 90px 20px 80px; align-items: center; text-align: center; }
+    .hero-tag { margin-left: auto; margin-right: auto; }
+    .hero-btns { justify-content: center; }
   }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.5rem; text-decoration: none; }
-  .logo span { color: var(--red); }
-  .nav-links { display: flex; gap: 24px; font-size: .95rem; font-weight: 500; }
-  .nav-links a { text-decoration: none; color: var(--muted); }
-  .nav-links a:hover { color: var(--red); }
-  @media (max-width: 640px) { .nav-links { display: none; } }
 
-  /* HERO */
-  .hero { padding: 80px 0 72px; text-align: center; position: relative; overflow: hidden; }
-  .flag { display: flex; justify-content: center; gap: 6px; margin-bottom: 28px; }
-  .flag i { width: 36px; height: 5px; border-radius: 3px; display: block; }
-  .flag i:nth-child(1) { background: var(--green); }
-  .flag i:nth-child(2) { background: #fff; border: 1px solid var(--line); }
-  .flag i:nth-child(3) { background: var(--red); }
-  .hero h1 {
-    font-family: 'Playfair Display', serif; font-weight: 800;
-    font-size: clamp(3rem, 11vw, 6.5rem); line-height: 1; letter-spacing: -1px;
+  /* ---------- INFO STRIP ---------- */
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .strip div.cell { padding: 26px 20px; text-align: center; font-size: .9rem; color: var(--muted); }
+  .strip div.cell + div.cell { border-left: 1px solid var(--line); }
+  .strip b { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--gold); margin-bottom: 2px; }
+  .strip a { text-decoration: none; }
+  @media (max-width: 700px) { .strip .wrap { grid-template-columns: 1fr; } .strip div.cell + div.cell { border-left: 0; border-top: 1px solid var(--line); } }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  section { padding: 96px 0; }
+  .head { text-align: center; margin-bottom: 48px; }
+  .head h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.1; }
+  .head p { color: var(--muted); max-width: 560px; margin: 14px auto 0; }
+  .ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 16px 0 0; color: var(--gold); }
+  .ornament::before, .ornament::after { content: ""; width: 56px; height: 1px; background: var(--gold); opacity: .6; }
+
+  /* ---------- SIGNATURE ---------- */
+  .signature-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 14px; }
+  .sig { position: relative; overflow: hidden; border-radius: 2px; }
+  .sig img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .sig:hover img { transform: scale(1.05); }
+  .sig:first-child { grid-row: span 2; }
+  .sig figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; background: linear-gradient(0deg, rgba(0,0,0,.85), transparent); font-family: var(--serif); font-size: 1.4rem; font-weight: 600; }
+  .sig figcaption span { display: block; font-family: var(--sans); font-size: .75rem; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+  @media (max-width: 800px) {
+    .signature-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 320px 200px 200px; }
+    .sig:first-child { grid-column: span 2; grid-row: auto; }
   }
-  .hero h1 span { color: var(--red); font-style: italic; font-weight: 600; }
-  .hero p.tag { margin: 20px auto 36px; max-width: 520px; font-size: 1.15rem; color: var(--muted); }
-  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 14px 26px; border-radius: 999px; font-weight: 600;
-    text-decoration: none; transition: transform .15s, background .15s;
+
+  /* ---------- MENU ---------- */
+  .menu-section { background: var(--panel); border-top: 1px solid var(--line); }
+  .cats { position: sticky; top: 68px; z-index: 20; background: rgba(20,19,17,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+  .cats .wrap { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-top: 12px; padding-bottom: 12px; }
+  .cats .wrap::-webkit-scrollbar { display: none; }
+  .cat { flex: 0 0 auto; padding: 8px 16px; font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; text-decoration: none; color: var(--muted); border: 1px solid transparent; border-radius: 99px; transition: all .2s; }
+  .cat:hover { color: var(--text); }
+  .cat.active { color: #0a0a0a; background: var(--gold); }
+
+  .menu-group { margin-bottom: 72px; }
+  .group-title { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+  .group-title h3 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 2.6rem); font-weight: 600; color: var(--gold); white-space: nowrap; }
+  .group-title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .group-note { color: var(--muted); font-size: .85rem; margin: -16px 0 24px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .dish { background: var(--panel-2); border: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; transition: border-color .2s, transform .2s; }
+  .dish:hover { border-color: rgba(214,163,48,.55); transform: translateY(-3px); }
+  .dish-img { aspect-ratio: 5 / 3; overflow: hidden; background: #000; }
+  .dish-img img { width: 100%; height: 100%; object-fit: cover; }
+  .dish-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+  .dish-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .dish-name { font-family: var(--serif); font-size: 1.45rem; font-weight: 600; line-height: 1.15; }
+  .dish-price { color: var(--gold); font-weight: 600; white-space: nowrap; font-size: .95rem; }
+  .dish-desc { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+  .dish-note { color: var(--gold-soft); font-size: .75rem; font-style: italic; margin-top: 6px; }
+  .tag { font-size: .9rem; margin-left: 4px; }
+  .sizes { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: auto; padding-top: 16px; }
+  .sizes div { text-align: center; padding: 8px 4px; border: 1px solid var(--line); }
+  .sizes div + div { border-left: 0; }
+  .sizes small { display: block; font-size: .62rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .sizes b { color: var(--gold); font-size: .95rem; }
+
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) {
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .dish { flex-direction: row; }
+    .dish-img { flex: 0 0 110px; aspect-ratio: auto; }
+    .dish-body { padding: 14px 14px 14px 16px; }
+    .dish-name { font-size: 1.25rem; }
+    .dish-desc { font-size: .8rem; }
+    .sizes { padding-top: 10px; }
+    .sizes div { padding: 5px 2px; }
+    .sizes b { font-size: .85rem; }
   }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-red { background: var(--red); color: #fff; }
-  .btn-red:hover { background: var(--red-dark); }
-  .btn-green { background: #25a244; color: #fff; }
-  .btn-outline { border: 2px solid var(--ink); }
 
-  /* INFO STRIP */
-  .strip { background: var(--ink); color: var(--cream); }
-  .strip .wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 26px 20px; text-align: center; font-size: .95rem; }
-  .strip b { display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #f3c9a0; margin-bottom: 2px; }
-  @media (max-width: 640px) { .strip .wrap { grid-template-columns: 1fr; } }
+  /* price lists (drinks, extras) */
+  .lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+  .list-card { background: var(--panel-2); border: 1px solid var(--line); padding: 26px 28px; }
+  .list-card h4 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .row { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; font-size: .9rem; }
+  .row .dots { flex: 1; border-bottom: 1px dotted rgba(214,163,48,.35); transform: translateY(-4px); }
+  .row .p { color: var(--gold); font-weight: 600; white-space: nowrap; }
+  .legend { display: flex; gap: 22px; justify-content: center; color: var(--muted); font-size: .8rem; margin-top: -20px; margin-bottom: 8px; flex-wrap: wrap; }
 
-  /* SECTIONS */
-  section { padding: 80px 0; }
-  .eyebrow { color: var(--red); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: .8rem; text-align: center; }
-  h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3rem); text-align: center; margin: 6px 0 12px; }
-  .lead { text-align: center; color: var(--muted); max-width: 560px; margin: 0 auto 48px; }
+  /* ---------- ABOUT ---------- */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .about-photo { position: relative; }
+  .about-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .about-photo::after { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--gold); z-index: -1; }
+  .about-text .kicker { margin-bottom: 12px; }
+  .about-text h2 { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.1; margin-bottom: 22px; }
+  .about-text p { color: var(--muted); margin-bottom: 16px; }
+  .about-stats { display: flex; gap: 36px; margin: 28px 0 32px; }
+  .about-stats b { display: block; font-family: var(--serif); font-size: 2.4rem; color: var(--gold); line-height: 1; }
+  .about-stats span { font-size: .75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } .about-photo { max-width: 460px; margin: 0 auto; width: calc(100% - 18px); } }
 
-  /* MENU */
-  .tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
-  .tab {
-    border: 1px solid var(--line); background: var(--paper); color: var(--ink);
-    padding: 10px 20px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer;
-  }
-  .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-  .menu-panel { display: none; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 12px 32px; }
-  .menu-panel.active { display: block; }
-  .item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px dashed var(--line); }
-  .item:last-child { border-bottom: none; }
-  .item-body { flex: 1; }
-  .item-head { display: flex; align-items: baseline; gap: 10px; }
-  .item-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; }
-  .dots { flex: 1; border-bottom: 2px dotted #cdbda4; transform: translateY(-5px); }
-  .price { font-weight: 600; color: var(--red); white-space: nowrap; }
-  .item-desc { color: var(--muted); font-size: .93rem; margin-top: 2px; }
-  .badge { display: inline-block; font-size: .7rem; font-weight: 600; background: #e8f0e4; color: var(--green); padding: 2px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
-  @media (max-width: 640px) { .menu-panel { padding: 4px 18px; } }
+  /* ---------- CONTACT ---------- */
+  .contact { background: var(--panel); border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 24px; }
+  .info { background: var(--panel-2); border: 1px solid var(--line); padding: 34px; }
+  .info h3 { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
+  .hours { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: .9rem; }
+  .hours td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .hours td:last-child { text-align: right; color: var(--gold-soft); }
+  .info p { margin-bottom: 10px; font-size: .92rem; color: var(--muted); }
+  .info p a { color: var(--text); text-decoration: none; }
+  .info .hero-btns { margin-top: 24px; }
+  .map { border: 1px solid var(--line); min-height: 420px; }
+  .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; display: block; filter: grayscale(.4) invert(.9) hue-rotate(180deg) contrast(.9); }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } .info { padding: 26px; } }
 
-  /* ABOUT */
-  .about { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  .about h2, .about .eyebrow { text-align: left; }
-  .about p { color: var(--muted); margin-bottom: 14px; }
-  .pizza-art { aspect-ratio: 1; max-width: 380px; margin: 0 auto; width: 100%; }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--line); padding: 50px 20px 60px; text-align: center; color: var(--muted); font-size: .82rem; }
+  footer img { height: 34px; width: auto; margin: 0 auto 16px; }
+  footer .social { display: flex; gap: 18px; justify-content: center; margin-bottom: 14px; }
+  footer .social a { color: var(--gold); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; font-size: .72rem; }
 
-  /* VISIT */
-  .visit-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; }
-  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
-  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 12px; }
-  .hours { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-  .hours td { padding: 6px 0; border-bottom: 1px solid var(--line); }
-  .hours td:last-child { text-align: right; font-weight: 500; }
-  .contact-line { margin-bottom: 8px; }
-  .map { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); min-height: 360px; }
-  .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
-  @media (max-width: 760px) { .visit-grid { grid-template-columns: 1fr; } }
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0,0,0,.5); transition: transform .2s; }
+  .wa:hover { transform: scale(1.07); }
 
-  footer { background: var(--ink); color: #cbbba8; text-align: center; padding: 36px 20px; font-size: .9rem; }
-  footer .logo { color: var(--cream); display: inline-block; margin-bottom: 6px; }
-
-  /* Floating WhatsApp */
-  .wa-float {
-    position: fixed; right: 18px; bottom: 18px; z-index: 20;
-    width: 58px; height: 58px; border-radius: 50%;
-    background: #25a244; display: grid; place-items: center;
-    box-shadow: 0 6px 20px rgba(0,0,0,.25);
-  }
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 
-<nav>
+<!-- =====================================================================
+     VOS COORDONNÉES — modifiez ici (téléphone au format international sans +)
+     ===================================================================== -->
+<script>
+  var CONTACT = {
+    phoneIntl: "212777000811",          // ex. 212612345678  (pour WhatsApp et appel)
+    phoneShown: "07 77 00 08 11",   // tel qu'affiché sur le site
+    address: "Tanger, Maroc",    // adresse complète
+    mapQuery: "35.7735789,-5.7939823",  // position sur la carte
+    mapLink: "https://maps.app.goo.gl/V1vHUPSnwB7poii1A",  // lien Google Maps (itinéraire)
+    instagram: "https://instagram.com/",
+    email: "contact@artepizza.ma"
+  };
+</script>
+
+<nav class="nav">
   <div class="wrap">
-    <a href="#" class="logo">Arte <span>Pizza</span></a>
+    <a href="#" class="nav-logo" aria-label="ARTé — accueil"><img src="img/logo.png" alt="ARTé" width="890" height="234"></a>
     <div class="nav-links">
       <a href="#menu">Menu</a>
-      <a href="#about">About</a>
-      <a href="#visit">Visit us</a>
+      <a href="#about">À propos</a>
+      <a href="#contact">Contact</a>
     </div>
-    <a href="tel:+212600000000" class="btn btn-red" style="padding:9px 18px;font-size:.9rem;">Call to order</a>
+    <a href="#" class="btn btn-gold btn-sm js-tel">Appeler</a>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <div class="flag"><i></i><i></i><i></i></div>
-    <h1>Arte <span>Pizza</span></h1>
-    <p class="tag">Pizza and fresh pasta, made with love. Eat in, take away, or order by phone and WhatsApp.</p>
-    <div class="btns">
-      <a href="#menu" class="btn btn-red">See the menu</a>
-      <a href="https://wa.me/212600000000" class="btn btn-green">Order on WhatsApp</a>
+  <div class="hero-text">
+    <p class="kicker">Pizza · Pasta · Risotto</p>
+    <img class="hero-logo" src="img/logo.png" alt="ARTé" width="890" height="234">
+    <p class="hero-tag">L'art de la cuisine italienne, <em>servi avec passion.</em></p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-gold">Voir le menu</a>
+      <a href="#" class="btn btn-line js-wa">Commander sur WhatsApp</a>
     </div>
+  </div>
+  <div class="hero-img">
+    <img src="img/photo-meat-lover-slice.webp" alt="Pizza Meat Lover ARTé" fetchpriority="high">
   </div>
 </header>
 
 <div class="strip">
   <div class="wrap">
-    <div><b>Open daily</b>12:00 – 23:30</div>
-    <div><b>Call us</b>+212 6 00 00 00 00</div>
-    <div><b>Find us</b>Your street, Your city</div>
+    <div class="cell"><b>Ouvert tous les jours</b>12:00 – 02:00</div>
+    <div class="cell"><b>Appelez-nous</b><a href="#" class="js-tel js-phone-text">07 77 00 08 11</a></div>
+    <div class="cell"><b>Nous trouver</b><a href="#" class="js-address js-maplink">Tanger, Maroc</a></div>
   </div>
 </div>
 
-<section id="menu">
+<!-- SIGNATURE DISHES -->
+<section id="signature">
   <div class="wrap">
-    <p class="eyebrow">Our menu</p>
-    <h2>Made fresh, every day</h2>
-    <p class="lead">All pizzas are baked to order. Prices in Moroccan dirhams (DH).</p>
-
-    <div class="tabs">
-      <button class="tab active" data-tab="pizza">Pizza</button>
-      <button class="tab" data-tab="pasta">Pasta</button>
-      <button class="tab" data-tab="starters">Starters & salads</button>
-      <button class="tab" data-tab="drinks">Desserts & drinks</button>
+    <div class="head reveal">
+      <p class="kicker">Nos incontournables</p>
+      <h2>Les favoris de la maison</h2>
+      <div class="ornament">✦</div>
     </div>
-
-    <div class="menu-panel active" id="pizza">
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Margherita <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, fresh basil, olive oil</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Quattro Formaggi <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">75 DH</span></div><p class="item-desc">Mozzarella, gorgonzola, parmesan, goat cheese</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Pollo</span><span class="dots"></span><span class="price">70 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, grilled chicken, peppers, onion</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Frutti di Mare</span><span class="dots"></span><span class="price">90 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, shrimp, calamari, garlic, parsley</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Arte Special</span><span class="dots"></span><span class="price">85 DH</span></div><p class="item-desc">Tomato sauce, mozzarella, beef, mushrooms, olives, rocket</p></div></div>
-    </div>
-
-    <div class="menu-panel" id="pasta">
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Spaghetti Bolognese</span><span class="dots"></span><span class="price">65 DH</span></div><p class="item-desc">Slow-cooked beef ragù, parmesan</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Penne Arrabbiata <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Spicy tomato sauce, garlic, chilli, parsley</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Tagliatelle Alfredo</span><span class="dots"></span><span class="price">70 DH</span></div><p class="item-desc">Creamy parmesan sauce, chicken, mushrooms</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Linguine ai Frutti di Mare</span><span class="dots"></span><span class="price">95 DH</span></div><p class="item-desc">Shrimp, calamari, mussels, cherry tomatoes, white wine sauce</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Lasagna al Forno</span><span class="dots"></span><span class="price">75 DH</span></div><p class="item-desc">Layers of pasta, beef ragù, béchamel, mozzarella</p></div></div>
-    </div>
-
-    <div class="menu-panel" id="starters">
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Garlic Bread</span><span class="dots"></span><span class="price">25 DH</span></div><p class="item-desc">Fresh from the oven, with herb butter</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Bruschetta <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">35 DH</span></div><p class="item-desc">Toasted bread, tomato, basil, olive oil</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Caesar Salad</span><span class="dots"></span><span class="price">55 DH</span></div><p class="item-desc">Romaine, chicken, parmesan, croutons, Caesar dressing</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Caprese <span class="badge">Veggie</span></span><span class="dots"></span><span class="price">50 DH</span></div><p class="item-desc">Tomato, mozzarella, basil, balsamic</p></div></div>
-    </div>
-
-    <div class="menu-panel" id="drinks">
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Tiramisu</span><span class="dots"></span><span class="price">40 DH</span></div><p class="item-desc">Homemade, with mascarpone and espresso</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Panna Cotta</span><span class="dots"></span><span class="price">35 DH</span></div><p class="item-desc">With red fruit coulis</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Soft drinks</span><span class="dots"></span><span class="price">15 DH</span></div><p class="item-desc">Coca-Cola, Fanta, Sprite, water</p></div></div>
-      <div class="item"><div class="item-body"><div class="item-head"><span class="item-name">Fresh juice</span><span class="dots"></span><span class="price">20 DH</span></div><p class="item-desc">Orange, lemon-mint, or seasonal</p></div></div>
+    <div class="signature-grid reveal">
+      <figure class="sig"><img src="img/photo-pasta-arte.webp" alt="Pasta ARTé" loading="lazy"><figcaption><span>Pasta</span>ARTé — penne, crevettes, sauce piquante</figcaption></figure>
+      <figure class="sig"><img src="img/photo-pizza-roquette.webp" alt="Pizza Roquette" loading="lazy"><figcaption><span>Pizza</span>Roquette</figcaption></figure>
+      <figure class="sig"><img src="img/photo-pasta-saumon.webp" alt="Pasta Saumon" loading="lazy"><figcaption><span>Pasta</span>Saumon</figcaption></figure>
+      <figure class="sig"><img src="img/photo-pasta-cardinale.webp" alt="Pasta Cardinale" loading="lazy"><figcaption><span>Pasta</span>Cardinale</figcaption></figure>
+      <figure class="sig"><img src="img/photo-risotto-saumon.webp" alt="Risotto Saumon" loading="lazy"><figcaption><span>Risotto</span>Saumon</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="about" id="about">
+<!-- MENU -->
+<section id="menu" class="menu-section" style="padding-top:80px;">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="kicker">La carte</p>
+      <h2>Notre menu</h2>
+      <div class="ornament">✦</div>
+    </div>
+    <div class="legend"><span>🌿 Végétarien</span><span>🌶️ Piquant</span><span>Prix en dirhams (DH)</span></div>
+  </div>
+  <div class="cats"><div class="wrap" id="cats"></div></div>
+  <div class="wrap" id="menu-content"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
   <div class="wrap about-grid">
-    <svg class="pizza-art" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="92" fill="#d9a35c"/>
-      <circle cx="100" cy="100" r="80" fill="#c8412f"/>
-      <g fill="#f6e7c1">
-        <ellipse cx="72" cy="70" rx="16" ry="12"/><ellipse cx="128" cy="78" rx="15" ry="11"/>
-        <ellipse cx="96" cy="112" rx="18" ry="13"/><ellipse cx="62" cy="122" rx="13" ry="10"/>
-        <ellipse cx="136" cy="128" rx="16" ry="12"/><ellipse cx="104" cy="150" rx="12" ry="9"/>
-      </g>
-      <g fill="#3f6b3a">
-        <ellipse cx="86" cy="86" rx="7" ry="4" transform="rotate(-30 86 86)"/>
-        <ellipse cx="118" cy="104" rx="7" ry="4" transform="rotate(20 118 104)"/>
-        <ellipse cx="78" cy="140" rx="7" ry="4" transform="rotate(40 78 140)"/>
-        <ellipse cx="140" cy="100" rx="6" ry="3.5" transform="rotate(-50 140 100)"/>
-        <ellipse cx="108" cy="62" rx="6" ry="3.5" transform="rotate(10 108 62)"/>
-      </g>
-      <g stroke="#b37a3a" stroke-width="1.5" opacity=".5">
-        <line x1="100" y1="8" x2="100" y2="192"/><line x1="8" y1="100" x2="192" y2="100"/>
-        <line x1="35" y1="35" x2="165" y2="165"/><line x1="165" y1="35" x2="35" y2="165"/>
-      </g>
-    </svg>
-    <div>
-      <p class="eyebrow">Our story</p>
-      <h2>Italian classics, local heart</h2>
-      <p>At Arte Pizza, we make every pizza by hand and cook our pasta fresh to order. We use good ingredients and keep things simple, the way Italian food should be.</p>
-      <p>Whether you're stopping by for a quick lunch, dinner with family, or ordering in on a busy night, we'd love to feed you.</p>
-      <a href="#visit" class="btn btn-outline" style="margin-top:8px;">Visit us</a>
+    <div class="about-photo reveal"><img src="img/photo-pasta-saumon.webp" alt="Tagliatelle au saumon sur une table ARTé" loading="lazy"></div>
+    <div class="about-text reveal">
+      <p class="kicker">Notre histoire</p>
+      <h2>Une cuisine italienne,<br>faite avec art.</h2>
+      <p>Chez ARTé, chaque pizza est préparée à la commande et chaque plat de pâtes est cuisiné minute. Des produits frais, des recettes généreuses et une touche de créativité : c'est notre façon de faire.</p>
+      <p>Pour un déjeuner rapide, un dîner en famille ou une soirée entre amis, nous vous accueillons dans une ambiance chaleureuse — ou livrons le goût de l'Italie chez vous.</p>
+      <div class="about-stats">
+        <div><b>23</b><span>Pizzas</span></div>
+        <div><b>13</b><span>Pâtes & risotti</span></div>
+        <div><b>3</b><span>Tailles</span></div>
+      </div>
+      <a href="#menu" class="btn btn-line">Découvrir la carte</a>
     </div>
   </div>
 </section>
 
-<section id="visit">
+<!-- CONTACT -->
+<section id="contact" class="contact">
   <div class="wrap">
-    <p class="eyebrow">Visit us</p>
-    <h2>Come hungry</h2>
-    <p class="lead">Eat in, take away, or call ahead and we'll have it ready.</p>
-    <div class="visit-grid">
-      <div class="card">
-        <h3>Opening hours</h3>
+    <div class="head reveal">
+      <p class="kicker">Venez nous voir</p>
+      <h2>Contact & horaires</h2>
+      <div class="ornament">✦</div>
+    </div>
+    <div class="contact-grid">
+      <div class="info reveal">
+        <h3>Horaires</h3>
         <table class="hours">
-          <tr><td>Monday – Thursday</td><td>12:00 – 23:00</td></tr>
-          <tr><td>Friday</td><td>14:00 – 23:30</td></tr>
-          <tr><td>Saturday – Sunday</td><td>12:00 – 23:30</td></tr>
+          <tr><td>Tous les jours</td><td>12:00 – 02:00</td></tr>
         </table>
         <h3>Contact</h3>
-        <p class="contact-line">📍 Your street, Your city, Morocco</p>
-        <p class="contact-line">📞 <a href="tel:+212600000000">+212 6 00 00 00 00</a></p>
-        <p class="contact-line" style="margin-bottom:20px;">✉️ <a href="mailto:contact@artepizza.ma">contact@artepizza.ma</a></p>
-        <div class="btns" style="justify-content:flex-start;">
-          <a href="tel:+212600000000" class="btn btn-red">Call now</a>
-          <a href="https://wa.me/212600000000" class="btn btn-green">WhatsApp</a>
+        <p>📍 <a href="#" class="js-address js-maplink">Tanger, Maroc</a></p>
+        <p>📞 <a href="#" class="js-tel js-phone-text">07 77 00 08 11</a></p>
+        <p>✉️ <a href="#" class="js-mail">contact@artepizza.ma</a></p>
+        <div class="hero-btns">
+          <a href="#" class="btn btn-line js-maplink">Itinéraire</a>
+          <a href="#" class="btn btn-gold js-tel">Appeler</a>
+          <a href="#" class="btn btn-line js-wa">WhatsApp</a>
         </div>
       </div>
-      <div class="map">
-        <iframe src="https://www.google.com/maps?q=Morocco&output=embed" loading="lazy" title="Arte Pizza location"></iframe>
-      </div>
+      <div class="map reveal"><iframe id="map" loading="lazy" title="Plan d'accès ARTé" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <a href="#" class="logo">Arte <span style="color:#f3c9a0">Pizza</span></a>
-  <p>Pizza & Pasta · © <span id="year"></span> Arte Pizza</p>
+  <img src="img/logo.png" alt="ARTé" width="890" height="234">
+  <div class="social"><a href="#" class="js-insta" target="_blank" rel="noopener">Instagram</a><a href="#" class="js-wa">WhatsApp</a></div>
+  <p>© <span id="year"></span> ARTé — Pizza · Pasta · Risotto</p>
 </footer>
 
-<a href="https://wa.me/212600000000" class="wa-float" aria-label="Order on WhatsApp">
+<a href="#" class="wa js-wa" aria-label="Commander sur WhatsApp">
   <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg>
 </a>
 
+<!-- =====================================================================
+     LE MENU — pour changer un prix ou un plat, modifiez simplement ici.
+     p: prix unique      p: [solo, prince, king] pour les pizzas
+     t: "v" = végétarien   "s" = piquant
+     ===================================================================== -->
 <script>
-  document.querySelectorAll('.tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
-      document.querySelectorAll('.menu-panel').forEach(function (p) { p.classList.remove('active'); });
-      tab.classList.add('active');
-      document.getElementById(tab.dataset.tab).classList.add('active');
+var MENU = [
+  { id: "entrees", title: "Entrées", items: [
+    { n: "Chicken Wings", d: "Ailerons de poulet frits, sauce barbecue maison, ranch sauce", p: 55, img: "chicken-wings" },
+    { n: "Chicken Strips", d: "Filets de poulet panés, sélection de sauce", p: 35, img: "chicken-strips" },
+    { n: "Gambas Tempura", d: "Crevettes panées, sauce sweet-chili", p: 45, img: "gambas-tempura" },
+    { n: "Cheesy Bread", d: "Baguette grillée, mozzarella, origan", p: 23, img: "cheesy-bread", t: "v" },
+    { n: "Tuna Bread", d: "Baguette grillée, thon, oignon, mozzarella, origan", p: 30, img: "tuna-bread" },
+    { n: "Bruschetta alla Feta", d: "Baguette grillée, ail, feta, tomates, oignons", p: 45, img: "bruschetta-feta", t: "v" },
+    { n: "Classic Caprese", d: "Tomates fraîches, basilic, mozzarella di bufala, huile d'olive, sauce pesto", p: 55, img: "caprese", t: "v" }
+  ]},
+  { id: "salades", title: "Salades", items: [
+    { n: "Athènes", d: "Tomate cerise, olive noire, feta, laitue, oignon, sauce vinaigrette", p: 65, img: "salade-athenes", t: "v" },
+    { n: "César", d: "Laitue, poulet grillé, copeaux de parmesan, tomate cerise, œuf de caille, croûtons, sauce César classique", p: 85, img: "salade-cesar" },
+    { n: "Niçoise", d: "Laitue, maïs, tomate cerise, thon, oignon, olive noire, œufs, penne, sauce vinaigrette", p: 75, img: "salade-nicoise" },
+    { n: "Portofino", d: "Roquette, avocat, crevettes grillées, tomates cerises, sauce vinaigrette", p: 85, img: "salade-portofino" },
+    { n: "Greek", d: "Tomate cerise, concombre, poivron vert, olive noire, feta, laitue, oignon, origan, sauce vinaigrette", p: 75, img: "salade-greek", t: "v" },
+    { n: "Burrata", d: "Burrata, roquette, tomate cerise, pêche, raisin, segments d'orange, sauce balsamique", p: 95, img: "salade-burrata", t: "v" },
+    { n: "ARTé Salad", d: "Poulet, tomate cerise, olive noire, laitue, oignon, parmesan, œufs, avocat, maïs, sauce vinaigrette", p: 85, img: "salade-arte" }
+  ]},
+  { id: "pasta", title: "Pasta", items: [
+    { n: "Fermière", d: "Penne, champignons, poulet, sauce blanche", note: "Sauce au choix", p: 90, img: "pasta-fermiere" },
+    { n: "Bolognaise", d: "Spaghetti, sauce bolognaise", p: 90, img: "pasta-bolognaise" },
+    { n: "Fruits de Mer", d: "Linguine, fruits de mer, sauce blanche", note: "Sauce au choix", p: 98, img: "pasta-fruits-de-mer" },
+    { n: "Saumon", d: "Tagliatelle, saumon fumé, épinards, sauce rosé", p: 105, img: "pasta-saumon" },
+    { n: "ARTé", d: "Penne, crevettes, sauce piquante", p: 125, img: "pasta-arte", t: "s" },
+    { n: "Pesto", d: "Penne, champignons, poulet, sauce blanche, sauce pesto", p: 90, img: "pasta-pesto" },
+    { n: "Arrabbiata", d: "Penne, sauce tomate, sauce piquante", p: 85, img: "pasta-arrabiata", t: "s" },
+    { n: "Cardinale", d: "Linguine, crevettes, champignons, sauce blanche", p: 98, img: "pasta-cardinale" },
+    { n: "Lasagne", d: "Lasagne, sauce bolognaise, sauce blanche, mozzarella", p: 85, img: "lasagne" },
+    { n: "Crazy Pasta", d: "Fusilli, crevettes, mozzarella, sauce rosé", note: "Servie avec un show ✨", p: 179, img: "crazy-pasta" }
+  ]},
+  { id: "risotto", title: "Risotto", items: [
+    { n: "Fruits de Mer", d: "Riz arborio, marmelade, fruits de mer, parmesan", p: 130, img: "risotto-fruits-de-mer" },
+    { n: "Milanaise", d: "Riz arborio, poulet, champignons, parmesan", p: 110, img: "risotto-milanaise" },
+    { n: "Saumon", d: "Riz arborio, pavé de saumon, épinards, sauce pesto", p: 135, img: "risotto-saumon" }
+  ]},
+  { id: "pizzas", title: "Pizzas", note: "Trois tailles : Solo · Prince · King", items: [
+    { n: "Margherita", d: "Sauce tomate, mozzarella", p: [45, 75, 99], img: "pizza-margherita", t: "v" },
+    { n: "Meat Lover", d: "Sauce tomate, mozzarella, pepperoni, jambon de dinde, poulet, viande hachée, sauce barbecue", p: [75, 95, 160], img: "pizza-meat-lover" },
+    { n: "Frutti di Mare", d: "Sauce tomate, mozzarella, fruits de mer, ail", p: [75, 95, 160], img: "pizza-frutti-di-mare" },
+    { n: "Royal", d: "Mozzarella, pepperoni, champignons, poivron vert, oignon rouge, olives, viande hachée", p: [75, 95, 160], img: "pizza-royal" },
+    { n: "Roasted Potato", d: "Crème fraîche, mozzarella, tranches de pommes de terre, poulet, ail, romarin", p: [75, 95, 160], img: "pizza-roasted-potato" },
+    { n: "Chili Mexican", d: "Sauce tomate, mozzarella, pepperoni, oignons rouges, olives, piments, ail, chilis", p: [65, 85, 150], img: "pizza-chili-mexican", t: "s" },
+    { n: "Cheezy", d: "Sauce tomate, mozzarella, feta, chèvre", p: [75, 95, 160], img: "pizza-cheezy", t: "v" },
+    { n: "Tasty Chicken", d: "Sauce tomate, mozzarella, poulet, oignons rouges, poivron vert", p: [65, 85, 150], img: "pizza-tasty-chicken" },
+    { n: "Veggie", d: "Sauce tomate, mozzarella, champignons, oignons rouges, poivron vert, olives, tomates cerises", p: [65, 85, 150], img: "pizza-veggie", t: "v" },
+    { n: "Basilica", d: "Sauce tomate, mozzarella, tomates cerises, basilic frais", p: [65, 85, 150], img: "pizza-basilica", t: "v" },
+    { n: "Pepperoni", d: "Sauce tomate, mozzarella, pepperoni", p: [68, 89, 153], img: "pizza-pepperoni" },
+    { n: "Hawaï", d: "Sauce tomate, mozzarella, jambon de dinde, ananas", p: [65, 85, 150], img: "pizza-hawai" },
+    { n: "Roquette", d: "Sauce tomate, mozzarella, roquette, oignons rouges, parmesan", p: [75, 95, 160], img: "pizza-roquette", t: "v" },
+    { n: "Avocat", d: "Crème fraîche, mozzarella, roquette, purée d'avocat, tomates cerises", p: [75, 95, 160], img: "pizza-avocat", t: "v" },
+    { n: "Barbecue Chicken", d: "Sauce barbecue, mozzarella, poulet, poivron vert, oignons rouges", p: [68, 89, 153], img: "pizza-bbq-chicken" },
+    { n: "Gamberetti", d: "Sauce tomate, mozzarella, oignons rouges, tomates cerises, olives, champignons, paprika, ail, crevettes", p: [75, 95, 160], img: "pizza-gamberetti" },
+    { n: "Viande Hachée", d: "Sauce tomate, mozzarella, viande hachée", p: [68, 89, 153], img: "pizza-viande-hachee" },
+    { n: "Feta", d: "Sauce tomate, mozzarella, oignons caramélisés, feta, poulet", p: [75, 95, 160], img: "pizza-feta" },
+    { n: "Tonno", d: "Sauce tomate, mozzarella, thon", p: [68, 89, 153], img: "pizza-tonno" },
+    { n: "Scampi", d: "Sauce tomate, mozzarella, oignons rouges caramélisés, tomates cerises, chilis, langoustines", p: [75, 95, 160], img: "pizza-scampi", t: "s" },
+    { n: "Saumon", d: "Sauce tomate, mozzarella, tomates cerises, oignons rouges, saumon, ail", p: [75, 95, 160], img: "pizza-saumon" },
+    { n: "Burrata", d: "Sauce tomate, mozzarella, burrata, tomates cerises, basilic", p: [95, 125, 153], img: "pizza-burrata", t: "v" },
+    { n: "Chicken Satay", d: "Sauce saté, mozzarella, poulet, poivron vert, oignons rouges", p: [68, 89, 153], img: "pizza-chicken-satay" }
+  ]},
+  { id: "brunch", title: "Brunch", items: [
+    { n: "Burrata Toast", d: "Toast grillé, guacamole, burrata, cream cheese, tomate cerise, sauce pesto, sauce balsamique", p: 85, img: "burrata-toast", t: "v" },
+    { n: "Tuna Toast", d: "Toast grillé, thon, poivron vert, mayonnaise, fromage", p: 45, img: "tuna-toast" },
+    { n: "Gambas Toast", d: "Toast grillé, crevettes, poivron vert, sauce cocktail, fromage", p: 65, img: "gambas-toast" }
+  ]},
+  { id: "desserts", title: "Desserts", items: [
+    { n: "Tiramisu Speculoos", p: 59, img: "tiramisu-speculoos" },
+    { n: "Tiramisu Italien", p: 59, img: "tiramisu-italien" },
+    { n: "Tiramisu Pistachio", p: 59, img: "tiramisu-pistachio" },
+    { n: "Pistachio", p: 69, img: "pistachio" },
+    { n: "San Sebastian", d: "Cheesecake basque", p: 65, img: "san-sebastian" },
+    { n: "Panna Cotta", p: 45, img: "panna-cotta" },
+    { n: "M&M's Pizza", d: "Petite 58 DH · Grande 78 DH", p: "58 / 78", img: "mms-pizza" },
+    { n: "Lotus Pizza", d: "Petite 58 DH · Grande 78 DH", p: "58 / 78", img: "lotus-pizza" },
+    { n: "Oreo Pizza", d: "Petite 58 DH · Grande 78 DH", p: "58 / 78", img: "oreo-pizza" }
+  ]}
+];
+
+var LISTS = { id: "boissons", title: "Boissons", cards: [
+  { h: "Boissons", rows: [["Soda",20],["Fanta Exotic",25],["Fanta Orange",25],["Red Bull",30],["Ice Tea",25],["Oasis Tropical",25],["Oasis Framboise",25],["Oasis Pomme Cassis",25],["A-A Drink",25],["Fernandes",25],["Tropico",25],["Oulmès Mojito",25],["Oulmès Tropical",25],["Oulmès Strawberry",25],["Oulmès",15],["Sidi Ali",10]] },
+  { h: "Café", rows: [["Espresso single",19],["Espresso double",24],["Cappuccino",24],["Café latte",24],["Café au lait",22],["Café allongé",22],["Thé",20]] },
+  { h: "Mojitos", rows: [["Virgin Mojito",40],["ARTé Mojito",50],["Blue Mojito",45],["Strawberry",45],["Ananas",45]] },
+  { h: "Jus", rows: [["Jus d'orange",25],["Jus de citron",25],["Jus d'ananas",45],["Jus de pomme",35],["Jus de fraise",40],["Jus de pastèque",40]] },
+  { h: "Jus pressés", rows: [["Jus d'ananas",45],["Jus de pomme",45]] }
+]};
+
+var EXTRAS = { id: "supplements", title: "Suppléments", cards: [
+  { h: "Suppléments", rows: [["Burrata",60],["Gambas",25],["Dinde fumée",20],["Champignons",20],["Poulet",20],["Viande hachée",25],["Bolognaise",20],["Fromage parmesan",25],["Fromage mozzarella",10]] },
+  { h: "Suppléments", rows: [["Nutella",10],["Lotus",10],["Avocat",15],["Fromage chèvre",20],["Sauce (au choix)",10],["Pepperoni",25],["Thon",15],["Ananas",15],["Gouda",22]] }
+]};
+</script>
+
+<script>
+(function () {
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var tagIcon = { v: '<span class="tag" title="Végétarien">🌿</span>', s: '<span class="tag" title="Piquant">🌶️</span>' };
+
+  function dish(it) {
+    var sized = Array.isArray(it.p);
+    var price = sized ? "" : '<span class="dish-price">' + esc(it.p) + " DH</span>";
+    var sizes = sized ? '<div class="sizes"><div><small>Solo</small><b>' + it.p[0] + '</b></div><div><small>Prince</small><b>' + it.p[1] + '</b></div><div><small>King</small><b>' + it.p[2] + "</b></div></div>" : "";
+    return '<article class="dish">' +
+      (it.img ? '<div class="dish-img"><img src="img/' + it.img + '.webp" alt="' + esc(it.n) + '" loading="lazy" width="640" height="384"></div>' : "") +
+      '<div class="dish-body"><div class="dish-top"><h4 class="dish-name">' + esc(it.n) + (it.t ? tagIcon[it.t] : "") + "</h4>" + price + "</div>" +
+      (it.d ? '<p class="dish-desc">' + esc(it.d) + "</p>" : "") +
+      (it.note ? '<p class="dish-note">' + esc(it.note) + "</p>" : "") +
+      sizes + "</div></article>";
+  }
+  function listGroup(g) {
+    return '<div class="menu-group" id="' + g.id + '"><div class="group-title"><h3>' + g.title + '</h3></div><div class="lists">' +
+      g.cards.map(function (c) {
+        return '<div class="list-card"><h4>' + c.h + "</h4>" + c.rows.map(function (r) {
+          return '<div class="row"><span>' + esc(r[0]) + '</span><span class="dots"></span><span class="p">' + r[1] + " DH</span></div>";
+        }).join("") + "</div>";
+      }).join("") + "</div></div>";
+  }
+
+  var html = MENU.map(function (g) {
+    return '<div class="menu-group" id="' + g.id + '"><div class="group-title"><h3>' + g.title + "</h3></div>" +
+      (g.note ? '<p class="group-note">' + g.note + "</p>" : "") +
+      '<div class="grid">' + g.items.map(dish).join("") + "</div></div>";
+  }).join("") + listGroup(LISTS) + listGroup(EXTRAS);
+  document.getElementById("menu-content").innerHTML = html;
+
+  var groups = MENU.concat([LISTS, EXTRAS]);
+  var cats = document.getElementById("cats");
+  cats.innerHTML = groups.map(function (g) { return '<a class="cat" href="#' + g.id + '">' + g.title + "</a>"; }).join("");
+
+  // highlight current category while scrolling
+  var links = cats.querySelectorAll(".cat");
+  var sections = groups.map(function (g) { return document.getElementById(g.id); });
+  function onScroll() {
+    var y = window.scrollY + 160, idx = -1;
+    sections.forEach(function (s, i) { if (s.offsetTop <= y) idx = i; });
+    links.forEach(function (l, i) {
+      var on = i === idx;
+      if (on && !l.classList.contains("active")) { var bar = l.parentNode; bar.scrollTo({ left: l.offsetLeft - bar.clientWidth / 2 + l.offsetWidth / 2, behavior: "smooth" }); }
+      l.classList.toggle("active", on);
     });
-  });
-  document.getElementById('year').textContent = new Date().getFullYear();
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // contact details
+  var wa = "https://wa.me/" + CONTACT.phoneIntl + "?text=" + encodeURIComponent("Bonjour ARTé, je voudrais passer une commande :");
+  document.querySelectorAll(".js-wa").forEach(function (a) { a.href = wa; a.target = "_blank"; a.rel = "noopener"; });
+  document.querySelectorAll(".js-tel").forEach(function (a) { a.href = "tel:+" + CONTACT.phoneIntl; });
+  document.querySelectorAll(".js-phone-text").forEach(function (a) { a.textContent = CONTACT.phoneShown; });
+  document.querySelectorAll(".js-address").forEach(function (a) { a.textContent = CONTACT.address; });
+  document.querySelectorAll(".js-mail").forEach(function (a) { a.href = "mailto:" + CONTACT.email; a.textContent = CONTACT.email; });
+  document.querySelectorAll(".js-maplink").forEach(function (a) { a.href = CONTACT.mapLink; a.target = "_blank"; a.rel = "noopener"; });
+  document.querySelectorAll(".js-insta").forEach(function (a) { a.href = CONTACT.instagram; });
+  document.getElementById("map").src = "https://www.google.com/maps?q=" + encodeURIComponent(CONTACT.mapQuery) + "&z=17&output=embed";
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // reveal animations
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+  } else { document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); }); }
+})();
 </script>
 </body>
 </html>
